@@ -54,11 +54,13 @@ uv run {baseDir}/scripts/setup_interactive.py
 ```bash
 uv run {baseDir}/scripts/search_twitter.py --query "{搜索内容}" --max-results 10
 ```
+**注意**: 执行后会在输出开头显示 Token 消耗报告，包含 input/output tokens 和预估成本。
 
 ### 深度舆情分析模式（调用 Reasoning 模型）
 ```bash
 uv run {baseDir}/scripts/search_twitter.py --query "{搜索内容}" --max-results 10 --analyze
 ```
+**注意**: 同样会显示详细的 Token 消耗报告。
 
 ### 参数说明
 

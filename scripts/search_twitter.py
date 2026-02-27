@@ -178,11 +178,8 @@ def search_twitter(
         
         result["tweets"] = tweets[:max_results]
         
-        # 将 token 消耗报告添加到结果中
+        # 将 token 消耗报告添加到结果中（由调用方决定是否打印）
         result["token_report"] = result["cost_report"]
-        
-        # 打印到 stdout 确保 OpenClaw 能看到
-        print(result["cost_report"], flush=True)
         
         return result
 
@@ -265,8 +262,13 @@ def main():
             args.max_results, proxy, args.analyze
         )
         
-        # 输出结果
-        output = {k: v for k, v in result.items() if k != "cost_report"}
+        # 先打印 token 消耗报告（确保 OpenClaw 能看到）
+        if result.get("cost_report"):
+            print(result["cost_report"])
+            print()  # 空行分隔
+        
+        # 输出 JSON 结果
+        output = {k: v for k, v in result.items() if k not in ("cost_report", "token_report")}
         print(json.dumps(output, ensure_ascii=False, indent=2))
     else:
         api_key = os.environ.get("GROK_API_KEY")
