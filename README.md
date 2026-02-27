@@ -57,7 +57,7 @@ uv run scripts/search_twitter.py --query "AI crypto trends" --analyze
 
 | 方案 | 计费方式 | 千次调用成本 |
 |------|----------|--------------|
-| **Grok x_search** | Token 计费 | **~$0.5 - $2** |
+| **Grok x_search** | Token 计费 | **~$2.8** |
 | X API Basic | 固定月租 | $100/月 |
 
 ## 🔗 链接
