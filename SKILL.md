@@ -110,10 +110,24 @@ export GROK_API_KEY="your_api_key_here"
 bash {baseDir}/scripts/check_warp.sh
 ```
 
-## 输出格式 (纯净提取)
+## 输出格式 (纯净提取 + Token 消耗报告)
 
-引擎剥离了冗余的 LLM 文本，直接返回原生 Tool Call 拦截数据：
+每次搜索完成后，技能会自动显示 **Token 消耗报告**，包含：
+- Input / Output / Total tokens
+- X Search 调用次数
+- 预估成本（美元）
 
+示例输出：
+```
+📊 Token 消耗报告:
+   Input tokens:  4,148
+   Output tokens: 906
+   Total tokens:  5,054
+   X Search calls: 0
+   💰 预估成本: $0.0013 ($1.28/千次)
+```
+
+JSON 返回格式：
 ```json
 {
   "status": "success",
@@ -129,11 +143,10 @@ bash {baseDir}/scripts/check_warp.sh
     }
   ],
   "model_used": "grok-4-1-fast-reasoning",
-  "x_search_calls": 1,
   "usage": {
-    "input_tokens": 1250,
-    "output_tokens": 45,
-    "total_tokens": 1295
+    "input_tokens": 4148,
+    "output_tokens": 906,
+    "total_tokens": 5054
   }
 }
 ```

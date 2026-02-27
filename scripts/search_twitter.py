@@ -178,8 +178,11 @@ def search_twitter(
         
         result["tweets"] = tweets[:max_results]
         
-        # 打印 token 消耗报告到 stderr
-        print(result["cost_report"], file=sys.stderr)
+        # 将 token 消耗报告添加到结果中
+        result["token_report"] = result["cost_report"]
+        
+        # 打印到 stdout 确保 OpenClaw 能看到
+        print(result["cost_report"], flush=True)
         
         return result
 
