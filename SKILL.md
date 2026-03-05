@@ -146,6 +146,25 @@ bash {baseDir}/scripts/check_warp.sh
 |----------|----------|--------------|--------------|----------|
 | **标准检索** | `grok-4-1-fast-reasoning` | ~5,000 Tokens | **~$2.8** | 日常搜索、舆情监控、推文分析 |
 
+## 与 opentwitter 的分工
+
+本技能与 `opentwitter` (6551 API) 都是推特搜索方案，但定位不同：
+
+| 场景 | 推荐技能 | 原因 |
+|------|---------|------|
+| **自然语言搜索**<br>例："币圈大佬最近动态"、"马斯克对 crypto 的看法" | ✅ grok-twitter-search | Grok 理解语义，能处理模糊查询 |
+| **精确用户搜索**<br>例："from:cz_binance"、"获取 @elonmusk 最近 20 条推文" | ✅ opentwitter | 结构化参数，结果稳定 |
+| **舆情分析/观点总结**<br>例："分析 CZ 对马斯克收购推特的态度" | ✅ grok-twitter-search | LLM 自带分析能力 |
+| **批量数据获取**<br>例：获取用户 follower 列表、删除的推文 | ✅ opentwitter | 专用 API，数据结构完整 |
+| **话题/标签搜索**<br>例："#bitcoin 热门推文"、"含 hashtag 的推文" | ✅ opentwitter | 支持 hashtag 参数过滤 |
+| **日期范围搜索**<br>例："2025 年 1 月以来的推文" | ✅ opentwitter | 支持 sinceDate/untilDate |
+
+**经验法则：**
+- 用户用**自然语言**提问 → grok-twitter-search
+- 用户用**推特搜索语法**（from:, to:, #hashtag）→ opentwitter
+
+---
+
 ## 故障排查
 
 ### 检查环境配置
@@ -166,3 +185,4 @@ bash {baseDir}/scripts/check_warp.sh
 **Q: 返回空结果**
 - 检查查询词是否过于具体或敏感
 - 尝试简化查询或使用英文关键词
+- 如果查询包含推特语法（如 `from:username`），改用 opentwitter
