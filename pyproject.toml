@@ -1,6 +1,6 @@
 [project]
 name = "grok-twitter-search"
-version = "1.0.0"
+version = "1.0.1"
 description = "使用 xAI Grok 模型的 x_search 工具智能搜索 Twitter 内容"
 readme = "README.md"
 requires-python = ">=3.10"
